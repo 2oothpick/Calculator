@@ -1,3 +1,73 @@
 body {
-    background-color: black
+    background-color: black;
+    background-image: linear-gradient(to right, rgba(18, 1, 1, 0), rgb(43, 11, 11));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+div.calculator {
+    width: 25%;
+    height: 80%;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 50px;
+    padding: 20px;
+    background-color: rgb(16, 4, 29);
+    /* flex: 0 1 1; */
+}
+
+div.screen {
+    /* border: 1px solid blue; */
+    width: 100%;
+    height: 30%;
+    border-radius: 50px 50px 0 0;
+    background-color: rgb(16, 4, 29);
+    color: rgb(118, 116, 116);
+    font-size: 50px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+div.screen div {
+    padding: 20px;
+}
+
+div.pad {
+    /* border: 1px solid red; */
+    height: 70%;
+    border-radius: 0 0 50px 50px;
+    background-color: rgb(16, 4, 29);
+}
+
+section {
+    /* border: 1px solid yellow; */
+    height: 20%;
+    display: flex;
+    justify-content: space-evenly
+}
+
+button {
+    min-width: 23%;
+    height: 90%;
+    border-radius: 50%;
+    flex: 0;
+    color: white;
+    background-color: rgb(29, 29, 35);
+    font-size: 20px;
+}
+
+button:hover {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    background-color: rgb(21, 21, 25);
+}
+
+button.side {
+    background-color: rgb(45, 2, 2);
+}
+
+button.side:hover {
+    background-color: rgb(30, 1, 1);
 }
