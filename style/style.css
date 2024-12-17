@@ -25,7 +25,8 @@ div.screen {
     height: 30%;
     border-radius: 50px 50px 0 0;
     background-color: rgb(16, 4, 29);
-    color: rgb(118, 116, 116);
+    color: rgb(0, 0, 0);
+    font-family: 'Orbitron', sans-serif;
     font-size: 50px;
     display: flex;
     justify-content: flex-end;
@@ -34,11 +35,17 @@ div.screen {
 }
 
 div.screen div {
+    border: 2px solid black;
+    background: rgb(69, 67, 67);
+    margin-bottom: 20px;
+    height: 50%;
     padding: 20px;
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: " [..]";
+    display: flex;
+    align-items: flex-end;
 }
 
 div.pad {
