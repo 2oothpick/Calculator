@@ -30,10 +30,15 @@ div.screen {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
+    direction: rtl;
 }
 
 div.screen div {
     padding: 20px;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: " [..]";
 }
 
 div.pad {
