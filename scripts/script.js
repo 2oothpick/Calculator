@@ -4,6 +4,8 @@ let operandOne = undefined;
 let operator = '';
 let operatorPressed = false;
 let operandTwo = undefined;
+let clearPressed = false;
+let dotPressed = false;
 
 const screen = document.querySelector('div.screen > div');
 
@@ -37,7 +39,16 @@ function findOperandTwo(val) {
   return result;
 }
 
-let clearPressed = false;
+function clearScreen() {
+  clearPressed = true;
+  clear.removeAttribute('style');
+  screen.textContent = '0';
+  operandOne = undefined;
+  operandTwo = undefined;
+  operatorPressed = false;
+  dotPressed = false;
+  clear.textContent = 'CE';
+}
 
 const clear = document.querySelector('button#clear');
 document.addEventListener('mousemove', () => {
@@ -55,41 +66,43 @@ document.addEventListener('mousemove', () => {
 });
 
 clear.addEventListener('click', () => {
-  clearPressed = true;
-  clear.removeAttribute('style');
-  screen.textContent = '';
-  operandOne = undefined;
-  operandTwo = undefined;
-  operatorPressed = false;
-  dotPressed = false;
-  clear.textContent = 'CE';
+  clearScreen();
 });
-
-let dotPressed = false;
 
 const pad = document.querySelector('.pad');
 pad.addEventListener('click', (event) => {
   const target = event.target;
   if (clearPressed == true) {
     switch (target.id) {
-      case 'dot':
+      //fix dot functionality
+      /* case 'dot':
         if (dotPressed == false) {
           dotPressed = true;
-          screen.textContent += '.';
           operandOne = findOperandOne('.');
           operandTwo = findOperandTwo('.');
-          if (
+          //console.log(operandOne, operandTwo);
+          //console.log(operandOne.split('').reverse().join(''))
+          if (operandOne) {
+            screen.textContent = operandOne.split('').reverse().join('');
+          } else if (
             operandOne &&
             operatorPressed == true &&
             Boolean(String(operandTwo))
           ) {
-            screen.textContent = '';
-            screen.textContent += operandTwo;
+            screen.textContent = operandTwo.split('').reverse().join('');
           }
         }
-        break;
+        break; */
       case 'zero':
+        /* if (dotPressed == true) {
+          screen.textContent = screen.textContent.split('').reverse().join('');
+          console.log('zero');
+        } */
+        console.log(`textcontent: ${screen.textContent}`);
+
+        if (screen.textContent == '0') screen.textContent = '';
         screen.textContent += 0;
+        //console.log(screen.textContent);
         operandOne = findOperandOne(0);
         operandTwo = findOperandTwo(0);
         if (
@@ -103,9 +116,10 @@ pad.addEventListener('click', (event) => {
         console.log(operandOne, operandTwo);
         break;
       case 'one':
-        screen.textContent += 1;
         operandOne = findOperandOne(1);
         operandTwo = findOperandTwo(1);
+        if (screen.textContent == '0') screen.textContent = '';
+        screen.textContent += 1;
         if (operandOne && operatorPressed == true && operandTwo) {
           screen.textContent = '';
           screen.textContent += operandTwo;
@@ -113,6 +127,7 @@ pad.addEventListener('click', (event) => {
         console.log(operandOne, operandTwo);
         break;
       case 'two':
+        if (screen.textContent == '0') screen.textContent = '';
         screen.textContent += 2;
         operandOne = findOperandOne(2);
         operandTwo = findOperandTwo(2);
@@ -123,6 +138,7 @@ pad.addEventListener('click', (event) => {
         console.log(operandOne, operandTwo);
         break;
       case 'three':
+        if (screen.textContent == '0') screen.textContent = '';
         screen.textContent += 3;
         operandOne = findOperandOne(3);
         operandTwo = findOperandTwo(3);
@@ -133,6 +149,7 @@ pad.addEventListener('click', (event) => {
         console.log(operandOne, operandTwo);
         break;
       case 'four':
+        if (screen.textContent == '0') screen.textContent = '';
         screen.textContent += 4;
         operandOne = findOperandOne(4);
         operandTwo = findOperandTwo(4);
@@ -143,6 +160,7 @@ pad.addEventListener('click', (event) => {
         console.log(operandOne, operandTwo);
         break;
       case 'five':
+        if (screen.textContent == '0') screen.textContent = '';
         screen.textContent += 5;
         operandOne = findOperandOne(5);
         operandTwo = findOperandTwo(5);
@@ -153,6 +171,7 @@ pad.addEventListener('click', (event) => {
         console.log(operandOne, operandTwo);
         break;
       case 'six':
+        if (screen.textContent == '0') screen.textContent = '';
         screen.textContent += 6;
         operandOne = findOperandOne(6);
         operandTwo = findOperandTwo(6);
@@ -163,6 +182,7 @@ pad.addEventListener('click', (event) => {
         console.log(operandOne, operandTwo);
         break;
       case 'seven':
+        if (screen.textContent == '0') screen.textContent = '';
         screen.textContent += 7;
         operandOne = findOperandOne(7);
         operandTwo = findOperandTwo(7);
@@ -173,6 +193,7 @@ pad.addEventListener('click', (event) => {
         console.log(operandOne, operandTwo);
         break;
       case 'eight':
+        if (screen.textContent == '0') screen.textContent = '';
         screen.textContent += 8;
         operandOne = findOperandOne(8);
         operandTwo = findOperandTwo(8);
@@ -183,6 +204,7 @@ pad.addEventListener('click', (event) => {
         console.log(operandOne, operandTwo);
         break;
       case 'nine':
+        if (screen.textContent == '0') screen.textContent = '';
         screen.textContent += 9;
         operandOne = findOperandOne(9);
         operandTwo = findOperandTwo(9);
