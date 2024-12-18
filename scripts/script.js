@@ -69,6 +69,33 @@ clear.addEventListener('click', () => {
   clearScreen();
 });
 
+function displayResult() {
+  if ((operandOne == 0 || operandOne) && (operandTwo || operandTwo == 0)) {
+    result = operate(Number(operandOne), Number(operandTwo), operator);
+    screen.textContent =
+      result == 'Infinity'
+        ? '?really'
+        : result < 0
+        ? `${Math.abs(result)}-`
+        : Number.isInteger(result)
+        ? result
+        : (Math.round(result * 100) / 100).toFixed(2);
+    operandOne = result;
+    operandTwo = undefined;
+  }
+}
+
+function displayNum(num) {
+  operandOne = findOperandOne(num);
+  operandTwo = findOperandTwo(num);
+  if (screen.textContent == '0') screen.textContent = '';
+  screen.textContent += num;
+  if (operandOne && operatorPressed == true && operandTwo) {
+    screen.textContent = '';
+    screen.textContent += operandTwo;
+  }
+}
+
 const pad = document.querySelector('.pad');
 pad.addEventListener('click', (event) => {
   const target = event.target;
@@ -99,7 +126,6 @@ pad.addEventListener('click', (event) => {
           console.log('zero');
         } */
         console.log(`textcontent: ${screen.textContent}`);
-
         if (screen.textContent == '0') screen.textContent = '';
         screen.textContent += 0;
         //console.log(screen.textContent);
@@ -116,192 +142,66 @@ pad.addEventListener('click', (event) => {
         console.log(operandOne, operandTwo);
         break;
       case 'one':
-        operandOne = findOperandOne(1);
-        operandTwo = findOperandTwo(1);
-        if (screen.textContent == '0') screen.textContent = '';
-        screen.textContent += 1;
-        if (operandOne && operatorPressed == true && operandTwo) {
-          screen.textContent = '';
-          screen.textContent += operandTwo;
-        }
+        displayNum(1);
         console.log(operandOne, operandTwo);
         break;
       case 'two':
-        if (screen.textContent == '0') screen.textContent = '';
-        screen.textContent += 2;
-        operandOne = findOperandOne(2);
-        operandTwo = findOperandTwo(2);
-        if (operandOne && operatorPressed == true) {
-          screen.textContent = '';
-          screen.textContent += operandTwo;
-        }
+        displayNum(2);
         console.log(operandOne, operandTwo);
         break;
       case 'three':
-        if (screen.textContent == '0') screen.textContent = '';
-        screen.textContent += 3;
-        operandOne = findOperandOne(3);
-        operandTwo = findOperandTwo(3);
-        if (operandOne && operatorPressed == true) {
-          screen.textContent = '';
-          screen.textContent += operandTwo;
-        }
+        displayNum(3);
         console.log(operandOne, operandTwo);
         break;
       case 'four':
-        if (screen.textContent == '0') screen.textContent = '';
-        screen.textContent += 4;
-        operandOne = findOperandOne(4);
-        operandTwo = findOperandTwo(4);
-        if (operandOne && operatorPressed == true) {
-          screen.textContent = '';
-          screen.textContent += operandTwo;
-        }
+        displayNum(4);
         console.log(operandOne, operandTwo);
         break;
       case 'five':
-        if (screen.textContent == '0') screen.textContent = '';
-        screen.textContent += 5;
-        operandOne = findOperandOne(5);
-        operandTwo = findOperandTwo(5);
-        if (operandOne && operatorPressed == true) {
-          screen.textContent = '';
-          screen.textContent += operandTwo;
-        }
+        displayNum(5);
         console.log(operandOne, operandTwo);
         break;
       case 'six':
-        if (screen.textContent == '0') screen.textContent = '';
-        screen.textContent += 6;
-        operandOne = findOperandOne(6);
-        operandTwo = findOperandTwo(6);
-        if (operandOne && operatorPressed == true) {
-          screen.textContent = '';
-          screen.textContent += operandTwo;
-        }
+        displayNum(6);
         console.log(operandOne, operandTwo);
         break;
       case 'seven':
-        if (screen.textContent == '0') screen.textContent = '';
-        screen.textContent += 7;
-        operandOne = findOperandOne(7);
-        operandTwo = findOperandTwo(7);
-        if (operandOne && operatorPressed == true) {
-          screen.textContent = '';
-          screen.textContent += operandTwo;
-        }
+        displayNum(7);
         console.log(operandOne, operandTwo);
         break;
       case 'eight':
-        if (screen.textContent == '0') screen.textContent = '';
-        screen.textContent += 8;
-        operandOne = findOperandOne(8);
-        operandTwo = findOperandTwo(8);
-        if (operandOne && operatorPressed == true) {
-          screen.textContent = '';
-          screen.textContent += operandTwo;
-        }
+        displayNum(8);
         console.log(operandOne, operandTwo);
         break;
       case 'nine':
-        if (screen.textContent == '0') screen.textContent = '';
-        screen.textContent += 9;
-        operandOne = findOperandOne(9);
-        operandTwo = findOperandTwo(9);
-        if (operandOne && operatorPressed == true) {
-          screen.textContent = '';
-          screen.textContent += operandTwo;
-        }
+        displayNum(9);
         console.log(operandOne, operandTwo);
         break;
       case 'eq':
-        if (operandTwo || operandTwo == 0) {
-          result = operate(Number(operandOne), Number(operandTwo), operator);
-          operatorPressed = false;
-          dotPressed = false;
-          screen.textContent =
-            result == 'Infinity'
-              ? '?really'
-              : result < 0
-              ? `${Math.abs(result)}-`
-              : Number.isInteger(result)
-              ? result
-              : (Math.round(result * 100) / 100).toFixed(2);
-          operandOne = result;
-          operandTwo = undefined;
-        }
+        displayResult();
         break;
       case 'add':
         operatorPressed = true;
         dotPressed = false;
-        if (operandOne && (operandTwo || operandTwo == 0)) {
-          result = operate(Number(operandOne), Number(operandTwo), operator);
-          console.log(result);
-          screen.textContent =
-            result == 'Infinity'
-              ? '?really'
-              : result < 0
-              ? `${Math.abs(result)}-`
-              : Number.isInteger(result)
-              ? result
-              : (Math.round(result * 100) / 100).toFixed(2);
-          operandOne = result;
-          operandTwo = undefined;
-        }
+        displayResult();
         operator = add;
         break;
       case 'mul':
         operatorPressed = true;
         dotPressed = false;
-        if (operandOne && (operandTwo || operandTwo == 0)) {
-          result = operate(Number(operandOne), Number(operandTwo), operator);
-          screen.textContent =
-            result == 'Infinity'
-              ? '?really'
-              : result < 0
-              ? `${Math.abs(result)}-`
-              : Number.isInteger(result)
-              ? result
-              : (Math.round(result * 100) / 100).toFixed(2);
-          operandOne = result;
-          operandTwo = undefined;
-        }
+        displayResult();
         operator = mul;
         break;
       case 'div':
         operatorPressed = true;
         dotPressed = false;
-        if (operandOne && (operandTwo || operandTwo == 0)) {
-          result = operate(Number(operandOne), Number(operandTwo), operator);
-          screen.textContent =
-            result == 'Infinity'
-              ? '?really'
-              : result < 0
-              ? `${Math.abs(result)}-`
-              : Number.isInteger(result)
-              ? result
-              : (Math.round(result * 100) / 100).toFixed(2);
-          operandOne = result;
-          operandTwo = undefined;
-        }
+        displayResult();
         operator = div;
         break;
       case 'sub':
         operatorPressed = true;
         dotPressed = false;
-        if (operandOne && (operandTwo || operandTwo == 0)) {
-          result = operate(Number(operandOne), Number(operandTwo), operator);
-          screen.textContent =
-            result == 'Infinity'
-              ? '?really'
-              : result < 0
-              ? `${Math.abs(result)}-`
-              : Number.isInteger(result)
-              ? result
-              : (Math.round(result * 100) / 100).toFixed(2);
-          operandOne = result;
-          operandTwo = undefined;
-        }
+        displayResult();
         operator = sub;
         break;
     }
