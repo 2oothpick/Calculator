@@ -48,184 +48,206 @@ document.addEventListener('mousemove', () => {
     clear.setAttribute(
       'style',
       `border: 2px solid
-        rgb(${r}, ${g}, ${b}); transition-duration: 0.4s
+        rgb(${r}, ${g}, ${b}); transition-duration: 0.1s
         `,
     );
   }
 });
 
+clear.addEventListener('click', () => {
+  clearPressed = true;
+  clear.removeAttribute('style');
+  screen.textContent = '';
+  operandOne = undefined;
+  operandTwo = undefined;
+  operatorPressed = false;
+  clear.textContent = 'CE';
+});
+
 const pad = document.querySelector('.pad');
 pad.addEventListener('click', (event) => {
   const target = event.target;
-  switch (target.id) {
-    case 'clear':
-      screen.textContent = '';
-      operandOne = undefined;
-      operandTwo = undefined;
-      operatorPressed = false;
-      clearPressed = true;
-      clear.removeAttribute('style');
-      break;
-    case 'zero':
-      screen.textContent += 0;
-      operandOne = findOperandOne(0);
-      operandTwo = findOperandTwo(0);
-      if (
-        operandOne &&
-        operatorPressed == true &&
-        Boolean(String(operandTwo))
-      ) {
-        screen.textContent = '';
-        screen.textContent += operandTwo;
-      }
-      console.log(operandOne, operandTwo);
-      break;
-    case 'one':
-      screen.textContent += 1;
-      operandOne = findOperandOne(1);
-      operandTwo = findOperandTwo(1);
-      if (operandOne && operatorPressed == true && operandTwo) {
-        screen.textContent = '';
-        screen.textContent += operandTwo;
-      }
-      console.log(operandOne, operandTwo);
-      break;
-    case 'two':
-      screen.textContent += 2;
-      operandOne = findOperandOne(2);
-      operandTwo = findOperandTwo(2);
-      if (operandOne && operatorPressed == true) {
-        screen.textContent = '';
-        screen.textContent += operandTwo;
-      }
-      console.log(operandOne, operandTwo);
-      break;
-    case 'three':
-      screen.textContent += 3;
-      operandOne = findOperandOne(3);
-      operandTwo = findOperandTwo(3);
-      if (operandOne && operatorPressed == true) {
-        screen.textContent = '';
-        screen.textContent += operandTwo;
-      }
-      console.log(operandOne, operandTwo);
-      break;
-    case 'four':
-      screen.textContent += 4;
-      operandOne = findOperandOne(4);
-      operandTwo = findOperandTwo(4);
-      if (operandOne && operatorPressed == true) {
-        screen.textContent = '';
-        screen.textContent += operandTwo;
-      }
-      console.log(operandOne, operandTwo);
-      break;
-    case 'five':
-      screen.textContent += 5;
-      operandOne = findOperandOne(5);
-      operandTwo = findOperandTwo(5);
-      if (operandOne && operatorPressed == true) {
-        screen.textContent = '';
-        screen.textContent += operandTwo;
-      }
-      console.log(operandOne, operandTwo);
-      break;
-    case 'six':
-      screen.textContent += 6;
-      operandOne = findOperandOne(6);
-      operandTwo = findOperandTwo(6);
-      if (operandOne && operatorPressed == true) {
-        screen.textContent = '';
-        screen.textContent += operandTwo;
-      }
-      console.log(operandOne, operandTwo);
-      break;
-    case 'seven':
-      screen.textContent += 7;
-      operandOne = findOperandOne(7);
-      operandTwo = findOperandTwo(7);
-      if (operandOne && operatorPressed == true) {
-        screen.textContent = '';
-        screen.textContent += operandTwo;
-      }
-      console.log(operandOne, operandTwo);
-      break;
-    case 'eight':
-      screen.textContent += 8;
-      operandOne = findOperandOne(8);
-      operandTwo = findOperandTwo(8);
-      if (operandOne && operatorPressed == true) {
-        screen.textContent = '';
-        screen.textContent += operandTwo;
-      }
-      console.log(operandOne, operandTwo);
-      break;
-    case 'nine':
-      screen.textContent += 9;
-      operandOne = findOperandOne(9);
-      operandTwo = findOperandTwo(9);
-      if (operandOne && operatorPressed == true) {
-        screen.textContent = '';
-        screen.textContent += operandTwo;
-      }
-      console.log(operandOne, operandTwo);
-      break;
-    case 'eq':
-      console.log(Number(operandOne), Number(operandTwo));
-      result = operate(Number(operandOne), Number(operandTwo), operator);
-      operatorPressed = false;
-      screen.textContent = result == 'Infinity' ? '?really' : result;
-      operandOne = result;
-      operandTwo = undefined;
-      break;
-    case 'add':
-      operatorPressed = true;
-      if (operandOne && (operandTwo || operandTwo == 0)) {
-        result = operate(Number(operandOne), Number(operandTwo), operator);
-        console.log(result);
-        screen.textContent = result == 'Infinity' ? '?really' : result;
-        operandOne = result;
-        operandTwo = undefined;
-      } else if (operandOne && operandTwo == undefined) {
-        screen.textContent = '';
-      }
-      operator = add;
-      break;
-    case 'mul':
-      operatorPressed = true;
-      if (operandOne && (operandTwo || operandTwo == 0)) {
-        result = operate(Number(operandOne), Number(operandTwo), operator);
-        screen.textContent = result == 'Infinity' ? '?really' : result;
-        operandOne = result;
-        operandTwo = undefined;
-      } else if (operandOne && operandTwo == undefined) {
-        screen.textContent = '';
-      }
-      operator = mul;
-      break;
-    case 'div':
-      operatorPressed = true;
-      if (operandOne && (operandTwo || operandTwo == 0)) {
-        result = operate(Number(operandOne), Number(operandTwo), operator);
-        screen.textContent = result == 'Infinity' ? '?really' : result;
-        operandOne = result;
-        operandTwo = undefined;
-      } else if (operandOne && operandTwo == undefined) {
-        screen.textContent = '';
-      }
-      operator = div;
-      break;
-    case 'sub':
-      operatorPressed = true;
-      if (operandOne && (operandTwo || operandTwo == 0)) {
-        result = operate(Number(operandOne), Number(operandTwo), operator);
-        screen.textContent = result == 'Infinity' ? '?really' : result;
-        operandOne = result;
-        operandTwo = undefined;
-      } else if (operandOne && operandTwo == undefined) {
-        screen.textContent = '';
-      }
-      operator = sub;
-      break;
+  if (clearPressed == true) {
+    switch (target.id) {
+      case 'zero':
+        screen.textContent += 0;
+        operandOne = findOperandOne(0);
+        operandTwo = findOperandTwo(0);
+        if (
+          operandOne &&
+          operatorPressed == true &&
+          Boolean(String(operandTwo))
+        ) {
+          screen.textContent = '';
+          screen.textContent += operandTwo;
+        }
+        console.log(operandOne, operandTwo);
+        break;
+      case 'one':
+        screen.textContent += 1;
+        operandOne = findOperandOne(1);
+        operandTwo = findOperandTwo(1);
+        if (operandOne && operatorPressed == true && operandTwo) {
+          screen.textContent = '';
+          screen.textContent += operandTwo;
+        }
+        console.log(operandOne, operandTwo);
+        break;
+      case 'two':
+        screen.textContent += 2;
+        operandOne = findOperandOne(2);
+        operandTwo = findOperandTwo(2);
+        if (operandOne && operatorPressed == true) {
+          screen.textContent = '';
+          screen.textContent += operandTwo;
+        }
+        console.log(operandOne, operandTwo);
+        break;
+      case 'three':
+        screen.textContent += 3;
+        operandOne = findOperandOne(3);
+        operandTwo = findOperandTwo(3);
+        if (operandOne && operatorPressed == true) {
+          screen.textContent = '';
+          screen.textContent += operandTwo;
+        }
+        console.log(operandOne, operandTwo);
+        break;
+      case 'four':
+        screen.textContent += 4;
+        operandOne = findOperandOne(4);
+        operandTwo = findOperandTwo(4);
+        if (operandOne && operatorPressed == true) {
+          screen.textContent = '';
+          screen.textContent += operandTwo;
+        }
+        console.log(operandOne, operandTwo);
+        break;
+      case 'five':
+        screen.textContent += 5;
+        operandOne = findOperandOne(5);
+        operandTwo = findOperandTwo(5);
+        if (operandOne && operatorPressed == true) {
+          screen.textContent = '';
+          screen.textContent += operandTwo;
+        }
+        console.log(operandOne, operandTwo);
+        break;
+      case 'six':
+        screen.textContent += 6;
+        operandOne = findOperandOne(6);
+        operandTwo = findOperandTwo(6);
+        if (operandOne && operatorPressed == true) {
+          screen.textContent = '';
+          screen.textContent += operandTwo;
+        }
+        console.log(operandOne, operandTwo);
+        break;
+      case 'seven':
+        screen.textContent += 7;
+        operandOne = findOperandOne(7);
+        operandTwo = findOperandTwo(7);
+        if (operandOne && operatorPressed == true) {
+          screen.textContent = '';
+          screen.textContent += operandTwo;
+        }
+        console.log(operandOne, operandTwo);
+        break;
+      case 'eight':
+        screen.textContent += 8;
+        operandOne = findOperandOne(8);
+        operandTwo = findOperandTwo(8);
+        if (operandOne && operatorPressed == true) {
+          screen.textContent = '';
+          screen.textContent += operandTwo;
+        }
+        console.log(operandOne, operandTwo);
+        break;
+      case 'nine':
+        screen.textContent += 9;
+        operandOne = findOperandOne(9);
+        operandTwo = findOperandTwo(9);
+        if (operandOne && operatorPressed == true) {
+          screen.textContent = '';
+          screen.textContent += operandTwo;
+        }
+        console.log(operandOne, operandTwo);
+        break;
+      case 'eq':
+        if (operandTwo || operandTwo == 0) {
+          result = operate(Number(operandOne), Number(operandTwo), operator);
+          operatorPressed = false;
+          screen.textContent =
+            result == 'Infinity'
+              ? '?really'
+              : result < 0
+              ? `${Math.abs(result)}-`
+              : result;
+          operandOne = result;
+          operandTwo = undefined;
+        }
+        break;
+      case 'add':
+        operatorPressed = true;
+        if (operandOne && (operandTwo || operandTwo == 0)) {
+          result = operate(Number(operandOne), Number(operandTwo), operator);
+          console.log(result);
+          screen.textContent =
+            result == 'Infinity'
+              ? '?really'
+              : result < 0
+              ? `${Math.abs(result)}-`
+              : result;
+          operandOne = result;
+          operandTwo = undefined;
+        }
+        operator = add;
+        break;
+      case 'mul':
+        operatorPressed = true;
+        if (operandOne && (operandTwo || operandTwo == 0)) {
+          result = operate(Number(operandOne), Number(operandTwo), operator);
+          screen.textContent =
+            result == 'Infinity'
+              ? '?really'
+              : result < 0
+              ? `${Math.abs(result)}-`
+              : result;
+          operandOne = result;
+          operandTwo = undefined;
+        }
+        operator = mul;
+        break;
+      case 'div':
+        operatorPressed = true;
+        if (operandOne && (operandTwo || operandTwo == 0)) {
+          result = operate(Number(operandOne), Number(operandTwo), operator);
+          screen.textContent =
+            result == 'Infinity'
+              ? '?really'
+              : result < 0
+              ? `${Math.abs(result)}-`
+              : result;
+          operandOne = result;
+          operandTwo = undefined;
+        }
+        operator = div;
+        break;
+      case 'sub':
+        operatorPressed = true;
+        if (operandOne && (operandTwo || operandTwo == 0)) {
+          result = operate(Number(operandOne), Number(operandTwo), operator);
+          screen.textContent =
+            result == 'Infinity'
+              ? '?really'
+              : result < 0
+              ? `${Math.abs(result)}-`
+              : result;
+          operandOne = result;
+          operandTwo = undefined;
+        }
+        operator = sub;
+        break;
+    }
   }
 });
