@@ -61,14 +61,33 @@ clear.addEventListener('click', () => {
   operandOne = undefined;
   operandTwo = undefined;
   operatorPressed = false;
+  dotPressed = false;
   clear.textContent = 'CE';
 });
+
+let dotPressed = false;
 
 const pad = document.querySelector('.pad');
 pad.addEventListener('click', (event) => {
   const target = event.target;
   if (clearPressed == true) {
     switch (target.id) {
+      case 'dot':
+        if (dotPressed == false) {
+          dotPressed = true;
+          screen.textContent += '.';
+          operandOne = findOperandOne('.');
+          operandTwo = findOperandTwo('.');
+          if (
+            operandOne &&
+            operatorPressed == true &&
+            Boolean(String(operandTwo))
+          ) {
+            screen.textContent = '';
+            screen.textContent += operandTwo;
+          }
+        }
+        break;
       case 'zero':
         screen.textContent += 0;
         operandOne = findOperandOne(0);
@@ -177,18 +196,22 @@ pad.addEventListener('click', (event) => {
         if (operandTwo || operandTwo == 0) {
           result = operate(Number(operandOne), Number(operandTwo), operator);
           operatorPressed = false;
+          dotPressed = false;
           screen.textContent =
             result == 'Infinity'
               ? '?really'
               : result < 0
               ? `${Math.abs(result)}-`
-              : result;
+              : Number.isInteger(result)
+              ? result
+              : (Math.round(result * 100) / 100).toFixed(2);
           operandOne = result;
           operandTwo = undefined;
         }
         break;
       case 'add':
         operatorPressed = true;
+        dotPressed = false;
         if (operandOne && (operandTwo || operandTwo == 0)) {
           result = operate(Number(operandOne), Number(operandTwo), operator);
           console.log(result);
@@ -197,7 +220,9 @@ pad.addEventListener('click', (event) => {
               ? '?really'
               : result < 0
               ? `${Math.abs(result)}-`
-              : result;
+              : Number.isInteger(result)
+              ? result
+              : (Math.round(result * 100) / 100).toFixed(2);
           operandOne = result;
           operandTwo = undefined;
         }
@@ -205,6 +230,7 @@ pad.addEventListener('click', (event) => {
         break;
       case 'mul':
         operatorPressed = true;
+        dotPressed = false;
         if (operandOne && (operandTwo || operandTwo == 0)) {
           result = operate(Number(operandOne), Number(operandTwo), operator);
           screen.textContent =
@@ -212,7 +238,9 @@ pad.addEventListener('click', (event) => {
               ? '?really'
               : result < 0
               ? `${Math.abs(result)}-`
-              : result;
+              : Number.isInteger(result)
+              ? result
+              : (Math.round(result * 100) / 100).toFixed(2);
           operandOne = result;
           operandTwo = undefined;
         }
@@ -220,6 +248,7 @@ pad.addEventListener('click', (event) => {
         break;
       case 'div':
         operatorPressed = true;
+        dotPressed = false;
         if (operandOne && (operandTwo || operandTwo == 0)) {
           result = operate(Number(operandOne), Number(operandTwo), operator);
           screen.textContent =
@@ -227,7 +256,9 @@ pad.addEventListener('click', (event) => {
               ? '?really'
               : result < 0
               ? `${Math.abs(result)}-`
-              : result;
+              : Number.isInteger(result)
+              ? result
+              : (Math.round(result * 100) / 100).toFixed(2);
           operandOne = result;
           operandTwo = undefined;
         }
@@ -235,6 +266,7 @@ pad.addEventListener('click', (event) => {
         break;
       case 'sub':
         operatorPressed = true;
+        dotPressed = false;
         if (operandOne && (operandTwo || operandTwo == 0)) {
           result = operate(Number(operandOne), Number(operandTwo), operator);
           screen.textContent =
@@ -242,7 +274,9 @@ pad.addEventListener('click', (event) => {
               ? '?really'
               : result < 0
               ? `${Math.abs(result)}-`
-              : result;
+              : Number.isInteger(result)
+              ? result
+              : (Math.round(result * 100) / 100).toFixed(2);
           operandOne = result;
           operandTwo = undefined;
         }
